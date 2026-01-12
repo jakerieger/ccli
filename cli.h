@@ -1,5 +1,5 @@
 /*
-    cli.h - v0.1.0 - Command-Line interface application framework for C
+    cli.h - v0.1.1 - Command-Line interface application framework for C
 
     Do this:
         #define CLI_IMPLEMENTATION
@@ -25,6 +25,7 @@
 
     REVISION HISTORY
 
+        0.1.1  (2026-01-12) undef possibly conflicting macro names
         0.1.0  (2026-01-12) initial release of clic
 */
 
@@ -33,8 +34,8 @@
 
 #define CLI_VERSION_MAJOR 0
 #define CLI_VERSION_MINOR 1
-#define CLI_VERSION_PATCH 0
-#define CLI_VERSION_STRING "0.1.0"
+#define CLI_VERSION_PATCH 1
+#define CLI_VERSION_STRING "0.1.1"
 
 #include <stdarg.h>
 #include <stdint.h>
@@ -628,5 +629,18 @@ int cli_app_run(cli_app* app, const i32 argc, char** argv) {
 
     return parse_command_args(app, cmd, argc, argv, 2);
 }
+
+// Remove macro definitions to avoid conflicts with files that include this header
+#undef ARENA_BASE
+#undef ALIGN_UP
+#undef KB
+#undef MB
+#undef PAGESIZE
+#undef MIN
+#undef MAX
+#undef ARENA_ALLOC
+#undef ARENA_ALLOC_ARRAY
+#undef MINIMUM_CAPACITY
+#undef STREQ
 
 #endif  // End of implementation
